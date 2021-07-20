@@ -3,3 +3,54 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background: linear-gradient(45deg, #a7cfdf 0%,#23538a 100%);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tecla {
+    background-color: #fff;
+    border-radius: 30px;
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    line-height: 120px;
+
+    cursor: pointer;
+    color: #e93d50;
+    font-weight: bold;
+    font-size: 1.75em;
+    
+    transition: 0.25s;
+}
+
+.tecla:hover, .tecla:focus {
+    background-color: #e93d50;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 20px rgba(0, 255, 234, 0.767);
+}
+
+.tecla:active {
+    box-shadow: 0 0 20px rgba(0, 255, 234, 0.767),
+                inset 0 0 40px rgba(0, 0, 0, .5);
+    background-color: #23538a;
+}
