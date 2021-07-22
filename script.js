@@ -1,24 +1,41 @@
 const mapaDeTeclas = ['q','w','e','a','s','d','z','x','c'];
 
-document.body.addEventListener('keyup', (evento)=> {
-    let tecla = evento.key.toLowerCase();
-    tocaSom(tecla);
+document.body.addEventListener('keydown', (evento)=> {
+    const tecla = evento.key.toLowerCase();
+    if (mapaDeTeclas.find((letra) => tecla == letra)) { 
+        const botao = document.querySelector(`.tecla-${tecla}`);
+        const duracaoAudio = tocaSom(tecla);
+        botao.classList.add("ativa");
+        
+        botao.style.animationDuration = duracaoAudio;
+
+        botao.addEventListener('animationend', () =>{
+            botao.classList.remove("ativa");
+        });
+    }
 });
 
 const listaDeTeclas = document.querySelectorAll('.tecla');
 for (let index = 0; index < listaDeTeclas.length; index++) {
     const tecla = listaDeTeclas[index];
     tecla.addEventListener('click', ()=> {
-        tocaSom(tecla.textContent.toLowerCase());
+        
+        const duracaoAudio = tocaSom(tecla.textContent.toLowerCase());
+        tecla.classList.add("ativa");
+        tecla.style.animationDuration = duracaoAudio;
+
+        tecla.addEventListener('animationend', ()=>{
+            tecla.classList.remove("ativa");
+        });
+    
     });
-    tecla.addEventListener('keyup', () => {
+    tecla.addEventListener('keydown', () => {
         tocaSom(tecla.textContent.toLowerCase());
     });
 }
 
 function tocaSom(teclaSom) {
-    if (mapaDeTeclas.find((letra) => teclaSom == letra)) {
-        let audio = document.querySelector(`#som_tecla-${teclaSom}`);
-        audio.play(); 
-    }  
+    const audio = document.querySelector(`#som_tecla-${teclaSom}`);
+    audio.play();
+    return audio.duration; 
 }
