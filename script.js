@@ -10,7 +10,7 @@ document.body.addEventListener('keydown', (evento)=> {
         botao.style.animationDuration = duracaoAudio;
 
         botao.addEventListener('animationend', () =>{
-            botao.classList.remove("ativa");
+            removeClasseAtiva(botao);
         });
     }
 });
@@ -25,7 +25,8 @@ for (let index = 0; index < listaDeTeclas.length; index++) {
         tecla.style.animationDuration = duracaoAudio;
 
         tecla.addEventListener('animationend', ()=>{
-            tecla.classList.remove("ativa");
+            
+           removeClasseAtiva(tecla);
         });
     
     });
@@ -38,4 +39,9 @@ function tocaSom(teclaSom) {
     const audio = document.querySelector(`#som_tecla-${teclaSom}`);
     audio.play();
     return audio.duration; 
+}
+
+function removeClasseAtiva(elemento) {
+    elemento.classList.remove("ativa");
+    console.log("Final da animação");
 }
