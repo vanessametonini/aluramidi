@@ -1,3 +1,6 @@
+:root {
+    --larguraElemento: calc((120px *3) + 20px);
+}
 
 * {
     box-sizing: border-box;
@@ -49,6 +52,47 @@ h1 {
     font-weight: bold;
     font-size: 1.75em;
     
+}
+
+.gravador button {
+    background-color: #e93d50;
+    width: var(--larguraElemento);
+    height: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.gravador button:hover {
+    background-color: #fff;
+    color: #e93d50;
+}
+
+.gravador label {
+    display: block;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.gravador input {
+    display: block;
+    background-color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    width: var(--larguraElemento);
+    height: 40px;
+    margin-top: 20px;
+    padding: 0 20px;
 }
 
 .tecla:focus, .ativa {

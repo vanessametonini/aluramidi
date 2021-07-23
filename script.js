@@ -35,6 +35,18 @@ for (let index = 0; index < listaDeTeclas.length; index++) {
     });
 }
 
+const formGravador = document.querySelector('.gravador');
+formGravador.addEventListener('submit', (evento)=> {
+    evento.preventDefault();
+    const sequenciaDeSom = formGravador.querySelector('input').value;
+    for (let i = 0; i < sequenciaDeSom.length; i++) {
+        let letra = sequenciaDeSom[i];
+        console.log(letra);
+        tocaSom(letra);
+    }
+});
+
+
 function tocaSom(teclaSom) {
     const audio = document.querySelector(`#som_tecla-${teclaSom}`);
     audio.play();
