@@ -1,9 +1,6 @@
 const mapaDeTeclas = ['q','w','e','a','s','d','z','x','c'];
 
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    console.log('document is ready :)');
 
     const todosSons = document.querySelectorAll('audio');
 
@@ -13,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const som = todosSons[index];
 
-        const numeroDeLetras = som.id.length;
-
         const idDoElemento = som.id
 
-        const tecla = idDoElemento.substring(numeroDeLetras - 1, numeroDeLetras)
+        const numeroDeLetrasDoId = idDoElemento.length;
 
-       //const tecla = som.id.charAt(numeroDeLetras - 1);
+        const tecla = idDoElemento.substring(numeroDeLetrasDoId - 1, numeroDeLetrasDoId)
+
+       //const tecla = som.id.charAt(numeroDeLetrasDoId - 1);
 
         listaDeDuracoes.push({
             tecla,
@@ -28,11 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    console.log(listaDeDuracoes);
-
 })
-
-
 
 document.body.addEventListener('keydown', (evento)=> {
     const tecla = evento.key.toLowerCase();
@@ -114,27 +107,11 @@ formGravador.addEventListener('submit', (evento)=> {
 
 
 function tocaSom(teclaSom) {
-
     const audio = document.querySelector(`#som_tecla-${teclaSom}`);
     audio.play();
-    return audio.duration; 
+    return audio.duration;
 }
 
 function removeClasseAtiva(elemento) {
     elemento.classList.remove("ativa");
-    //console.log("Final da animação");
 }
-
-
-
-// function playComposition(songArray) {
-//     let wait = 0;
-
-//     for(let songItem of songArray) {
-//         setTimeout(()=> {
-//             playSound(key${songItem});
-//         }, wait);
-
-//         wait += 250;
-//     }
-// }
