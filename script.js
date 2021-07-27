@@ -1,12 +1,46 @@
 const mapaDeTeclas = ['q','w','e','a','s','d','z','x','c'];
 
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    console.log('document is ready :)');
+
+    const todosSons = document.querySelectorAll('audio');
+
+    const listaDeDuracoes = [];
+
+    for (let index = 0; index < todosSons.length; index++) {
+
+        const som = todosSons[index];
+
+        const numeroDeLetras = som.id.length;
+
+        const idDoElemento = som.id
+
+        const tecla = idDoElemento.substring(numeroDeLetras - 1, numeroDeLetras)
+
+       //const tecla = som.id.charAt(numeroDeLetras - 1);
+
+        listaDeDuracoes.push({
+            tecla,
+            duracao: som.duration
+        })
+
+    }
+
+    console.log(listaDeDuracoes);
+
+})
+
+
+
 document.body.addEventListener('keydown', (evento)=> {
     const tecla = evento.key.toLowerCase();
     if (mapaDeTeclas.find((letra) => tecla == letra)) { 
         const botao = document.querySelector(`.tecla-${tecla}`);
         const duracaoAudio = tocaSom(tecla);
         botao.classList.add("ativa");
-        
+
         botao.style.animationDuration = duracaoAudio;
 
         botao.addEventListener('animationend', () =>{
@@ -16,19 +50,20 @@ document.body.addEventListener('keydown', (evento)=> {
 });
 
 const listaDeTeclas = document.querySelectorAll('.tecla');
+
 for (let index = 0; index < listaDeTeclas.length; index++) {
     const tecla = listaDeTeclas[index];
     tecla.addEventListener('click', ()=> {
-        
+
         const duracaoAudio = tocaSom(tecla.textContent.toLowerCase());
         tecla.classList.add("ativa");
         tecla.style.animationDuration = duracaoAudio;
 
         tecla.addEventListener('animationend', ()=>{
-            
+
            removeClasseAtiva(tecla);
         });
-    
+
     });
     tecla.addEventListener('keydown', () => {
         tocaSom(tecla.textContent.toLowerCase());
@@ -36,18 +71,50 @@ for (let index = 0; index < listaDeTeclas.length; index++) {
 }
 
 const formGravador = document.querySelector('.gravador');
+
 formGravador.addEventListener('submit', (evento)=> {
+
     evento.preventDefault();
+
     const sequenciaDeSom = formGravador.querySelector('input').value;
+
+    let espera = 2000;
+
     for (let i = 0; i < sequenciaDeSom.length; i++) {
+
         let letra = sequenciaDeSom[i];
-        console.log(letra);
-        tocaSom(letra);
+
+        //se for a primeira execucão, nao tem espera para tocar
+        if(i == 0) {
+            console.log(letra);
+            espera += tocaSom(letra)
+
+            console.log(espera);
+
+        }
+
+        //seguintes execuções espera para tocar
+        else {
+
+
+            setTimeout(() => {
+                console.log(letra);
+                espera += tocaSom(letra)
+                console.log(espera);
+            },
+            espera
+            )
+
+            console.log(espera);
+        }
+
     }
+
 });
 
 
 function tocaSom(teclaSom) {
+
     const audio = document.querySelector(`#som_tecla-${teclaSom}`);
     audio.play();
     return audio.duration; 
@@ -55,5 +122,19 @@ function tocaSom(teclaSom) {
 
 function removeClasseAtiva(elemento) {
     elemento.classList.remove("ativa");
-    console.log("Final da animação");
+    //console.log("Final da animação");
 }
+
+
+
+// function playComposition(songArray) {
+//     let wait = 0;
+
+//     for(let songItem of songArray) {
+//         setTimeout(()=> {
+//             playSound(key${songItem});
+//         }, wait);
+
+//         wait += 250;
+//     }
+// }
