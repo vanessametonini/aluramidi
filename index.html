@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Alura MIDI</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
@@ -15,26 +15,22 @@
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+
     <h1>Alura Midi</h1>
+
     <section class="teclado">
         <div class="tecla tecla-q" role="button" tabindex="1">Q</div>
         <div class="tecla tecla-w" role="button" tabindex="2">W</div>
         <div class="tecla tecla-e" role="button" tabindex="3">E</div>
-        
+
         <div class="tecla tecla-a" role="button" tabindex="4">A</div>
         <div class="tecla tecla-s" role="button" tabindex="5">S</div>
         <div class="tecla tecla-d" role="button" tabindex="6">D</div>
-        
+
         <div class="tecla tecla-z" role="button" tabindex="7">Z</div>
         <div class="tecla tecla-x" role="button" tabindex="8">X</div>
         <div class="tecla tecla-c" role="button" tabindex="9">C</div>
     </section>
-    <form class="gravador">
-        <label for="seq"> Crie sua própria música: </label>
-        <input type="text" name="sequencia" id="seq" placeholder="QWE ASD XCS">
-        <button> Tocar </button>
-    </form>
-
 
     <audio id="som_tecla-q" src="sounds/keyq.wav"></audio>
     <audio id="som_tecla-w" src="sounds/keyw.wav"></audio>
@@ -46,6 +42,6 @@
     <audio id="som_tecla-x" src="sounds/keyx.wav"></audio>
     <audio id="som_tecla-c" src="sounds/keyc.wav"></audio>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
