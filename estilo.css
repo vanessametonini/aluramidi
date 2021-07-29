@@ -28,14 +28,26 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 6px 8px 0 6px #666, 
+    10px 10px 10px #000;
 }
 
 @keyframes botaoAtivo {
-    0% {background-color: #fff}
-    50% {background-color: #e93d50}
+    0% {
+        background-color: #fff;
+        box-shadow: 3px 3px 0 #aaa;
+    }
+    50% {
+        background-color: #e93d50;
+        box-shadow: 3px 3px 0 #aaa inset;
+    }
     100% {
         background-color: #fff;
-        color: #e93d50
+        color: #e93d50;
+        box-shadow: 3px 3px 0 #aaa;
     }
 }
 
@@ -51,61 +63,14 @@ h1 {
     color: #e93d50;
     font-weight: bold;
     font-size: 1.75em;
-    
+
+    box-shadow: 3px 3px 0 #aaa;
 }
 
-.gravador button {
-    background-color: #e93d50;
-    width: var(--larguraElemento);
-    height: 40px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.gravador button:hover {
-    background-color: #fff;
-    color: #e93d50;
-}
-
-.gravador label {
-    display: block;
-    color: #fff;
-    font-size: 20px;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 600;
-}
-
-.gravador input {
-    display: block;
-    background-color: #fff;
-    border: none;
-    border-radius: 30px;
-    font-size: 20px;
-    font-weight: 700;
-    width: var(--larguraElemento);
-    height: 40px;
-    margin-top: 20px;
-    padding: 0 20px;
-}
 
 .tecla:focus, .ativa {
     background-color: #e93d50;
     color: #fff;
     outline: none;
-    box-shadow: 0 0 20px rgba(0, 255, 234, 0.767);
     animation: botaoAtivo 1s forwards;
 }
-
-.tecla:active{
-    box-shadow: 0 0 20px rgba(0, 255, 234, 0.767),
-                inset 0 0 40px rgba(0, 0, 0, .5);
-    background-color: #23538a;
-}
-
