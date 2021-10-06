@@ -20,19 +20,45 @@
 
     <h1>Alura Midi</h1>
 
-    <section class="teclado">
-        <button class="tecla tecla_pom">Pom</button>
-        <button class="tecla tecla_clap">Clap</button>
-        <button class="tecla tecla_tim">Tim</button>
+    <article class="midi" role="application">
+        <section class="teclado">
+            <button class="tecla tecla_pom">Pom</button>
+            <button class="tecla tecla_clap">Clap</button>
+            <button class="tecla tecla_tim">Tim</button>
 
-        <button class="tecla tecla_puff">Puff</button>
-        <button class="tecla tecla_splash">Splash</button>
-        <button class="tecla tecla_toim">Toim</button>
+            <button class="tecla tecla_puff">Puff</button>
+            <button class="tecla tecla_splash">Splash</button>
+            <button class="tecla tecla_toim">Toim</button>
 
-        <button class="tecla tecla_psh">Psh</button>
-        <button class="tecla tecla_tic">Tic</button>
-        <button class="tecla tecla_tom">Tom</button>
-    </section>
+            <button class="tecla tecla_psh">Psh</button>
+            <button class="tecla tecla_tic">Tic</button>
+            <button class="tecla tecla_tom">Tom</button>
+        </section>
+        <section class="gravador">
+            <div class="tela" aria-live="polite">
+                <div class="rolagem">
+                    <span class="som">pom</span>
+                    <span class="som">splash</span>
+                    <span class="som">psh</span>
+                    <span class="som">pom</span>
+                    <span class="som">splash</span>
+                    <span class="som">pom</span>
+                    <span class="som">splash</span>
+                    <span class="som">pom</span>
+                    <span class="som">tim</span>
+                    <span class="som">puff</span>
+                    <span class="som">pom</span>
+                    <span class="som">splash</span>
+                    <span class="som">tic</span>
+                    <span class="som">clap</span>
+                </div>
+            </div>
+            <button class="tecla apagar">Apagar</button>
+            <button class="tecla gravar">Gravar</button>
+            <button class="tecla tocar">Tocar</button>
+        </section>
+    </article>
+
 
     <audio src="sounds/keyq.wav" id="som_tecla_pom"></audio>
     <audio src="sounds/keyw.wav" id="som_tecla_clap"></audio>

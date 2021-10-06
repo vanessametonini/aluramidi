@@ -16,20 +16,40 @@ body {
   min-height: 100vh;
 }
 
+@media (min-width: 452px) and (max-width: 850px) {
+  body {
+    margin-top: 40px;
+  }
+}
+
+
 h1 {
   color: var(--branca);
   margin-bottom: 20px;
   font-size: 2rem;
 }
 
-.teclado {
+.midi {
   background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
   box-shadow: 6px 8px 0 6px #666, 10px 10px 10px #000;
   border-radius: 30px;
+  display: flex;
+  flex-flow: column-reverse;
+  padding: 10px;
+}
+
+@media (min-width: 850px) {
+  .midi {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.teclado {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-  padding: 10px;
 }
 
 .tecla {
@@ -38,13 +58,25 @@ h1 {
   box-shadow: 3px 3px 0 var(--cinza);
   color: var(--vermelha);
   cursor: pointer;
-  height: 120px;
-  font-size: 1.75em;
+  height: 90px;
+  font-size: 1.25em;
   font-weight: bold;
-  line-height: 120px;
+  line-height: 90px;
   text-align: center;
-  width: 120px;
+  width: 90px;
 }
+
+/*min-width = a partir de tal largura */
+@media (min-width: 452px) {
+
+  .tecla {
+    font-size: 1.75em;
+    line-height: 120px;
+    height: 120px;
+    width: 120px; 
+  }
+}
+
 
 .tecla.ativa,
 .tecla:active {
@@ -64,4 +96,74 @@ h1 {
 .tecla.ativa:focus,
 .tecla:active:focus {
   box-shadow: 3px 3px 0 var(--vermelha-escura) inset, 1px 1px 10px var(--luz);
+}
+
+
+.gravador {
+  display: grid;
+  gap: 10px 10px;
+  grid-template-areas:
+    "tela tela tela"
+    "apagar gravar tocar";
+
+  margin-bottom: 20px;
+}
+
+@media (min-width: 850px) {
+  .gravador {
+    margin-bottom: 0;
+  }
+}
+
+.tela {
+  background-color: #F7FFF1;
+  border: 2px solid #AAAAAA;
+  border-radius: 30px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 10px 4px #AAAAAA;
+  grid-area: tela;
+  padding: 20px 10px 20px;
+  height: 200px;
+  width: 100%;
+  word-spacing: 6px;
+}
+@media (min-width: 452px) {
+  .tela {
+    height: 250px;
+    width: 380px;
+  }
+}
+
+.tela .som {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  color: var(--vermelha);
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.tela .rolagem {
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.gravador .tecla {
+  color: #666666;
+}
+
+.apagar {
+  grid-area: apagar;
+}
+
+.gravar {
+  grid-area: gravar;
+}
+
+.tocar {
+  grid-area: tocar;
 }
