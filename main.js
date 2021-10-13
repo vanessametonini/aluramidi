@@ -1,3 +1,8 @@
+const estadosDoGravador = {
+    estaGravando: false
+};
+
+
 function tocaSom (seletorAudio) {
     const elemento = document.querySelector(seletorAudio);
 
@@ -11,6 +16,14 @@ function tocaSom (seletorAudio) {
 
 }
 
+function gravaSom() {
+    const templateDoSom  = `<span class="som">Bananinha</span>`;
+    if (estadosDoGravador.estaGravando) {
+        const tela = document.querySelector('.tela .rolagem');
+        tela.insertAdjacentHTML('beforeend', templateDoSom);
+    }
+}
+
 const listaDeTeclas = document.querySelectorAll('.tecla');
 
 //para
@@ -20,9 +33,10 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
     const instrumento = tecla.classList[1];
     const idAudio = `#som_${instrumento}`; //template string
 
-    tecla.onclick = function () {
+    tecla.addEventListener('click', function () {
         tocaSom(idAudio);
-    }
+        gravaSom();
+    });
 
     tecla.onkeydown = function (evento) {
 
@@ -38,9 +52,6 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
 
 }
 
-const estadosDoGravador = {
-    estaGravando: false
-};
 
 const botaoGravar = document.querySelector('.gravar');
 
@@ -48,10 +59,10 @@ botaoGravar.onclick = () => {
 
     if (estadosDoGravador.estaGravando == true) {
         estadosDoGravador.estaGravando = false;
-        botaoGravar.innerHTML = 'Gravar';
+        botaoGravar.textContent = 'Gravar';
     } else {
         estadosDoGravador.estaGravando = true;
-        botaoGravar.innerHTML = 'Parar';
+        botaoGravar.textContent = 'Parar';
     }
 
     console.log(estadosDoGravador.estaGravando);
