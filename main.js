@@ -2,42 +2,39 @@ const estadosDoGravador = {
     estaGravando: false
 };
 
-
 function tocaSom (seletorAudio) {
     const elemento = document.querySelector(seletorAudio);
 
     if (elemento && elemento.localName === 'audio') {
         elemento.play();
     }
-    //else {
-        //alert('Elemento não encontrado');
-        //console.log('Elemento não encontrado ou seletor inválido');
-    //}
-
+    else {
+        alert('Elemento não encontrado');
+        console.log('Elemento não encontrado ou seletor inválido');
+    }
 }
 
-function gravaSom() {
-    const templateDoSom  = `<span class="som">Bananinha</span>`;
+function gravaSom(nomeDoSom) {
+    const templateDoSom  = `<span class="som">${nomeDoSom}</span>`;
     if (estadosDoGravador.estaGravando) {
         const tela = document.querySelector('.tela .rolagem');
         tela.insertAdjacentHTML('beforeend', templateDoSom);
     }
 }
-
 const listaDeTeclas = document.querySelectorAll('.tecla');
 
 //para
 for (let contador = 0; contador < listaDeTeclas.length; contador++) {
-
     const tecla = listaDeTeclas[contador];
     const instrumento = tecla.classList[1];
     const idAudio = `#som_${instrumento}`; //template string
-
-    tecla.addEventListener('click', function () {
+    tecla.addEventListener('click', () => {
         tocaSom(idAudio);
-        gravaSom();
     });
 
+    tecla.addEventListener('click', () => {
+        gravaSom(tecla.textContent);
+    });
     tecla.onkeydown = function (evento) {
 
         if (evento.code === 'Space' || evento.code === 'Enter') {
@@ -45,18 +42,14 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
         }
 
     }
-
     tecla.onkeyup = function () {
         tecla.classList.remove('ativa');
     }
-
 }
-
 
 const botaoGravar = document.querySelector('.gravar');
 
-botaoGravar.onclick = () => {
-
+botaoGravar.addEventListener('click', () => {
     if (estadosDoGravador.estaGravando == true) {
         estadosDoGravador.estaGravando = false;
         botaoGravar.textContent = 'Gravar';
@@ -64,6 +57,5 @@ botaoGravar.onclick = () => {
         estadosDoGravador.estaGravando = true;
         botaoGravar.textContent = 'Parar';
     }
-
     console.log(estadosDoGravador.estaGravando);
-};
+});
