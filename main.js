@@ -4,10 +4,10 @@ function tocaSom (seletorAudio) {
     if (elemento && elemento.localName === 'audio') {
         elemento.play();
     }
-    else {
+    //else {
         //alert('Elemento não encontrado');
-        console.log('Elemento não encontrado ou seletor inválido');
-    }
+        //console.log('Elemento não encontrado ou seletor inválido');
+    //}
 
 }
 
@@ -37,3 +37,22 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
     }
 
 }
+
+const estadosDoGravador = {
+    estaGravando: false
+};
+
+const botaoGravar = document.querySelector('.gravar');
+
+botaoGravar.onclick = () => {
+
+    if (estadosDoGravador.estaGravando == true) {
+        estadosDoGravador.estaGravando = false;
+        botaoGravar.innerHTML = 'Gravar';
+    } else {
+        estadosDoGravador.estaGravando = true;
+        botaoGravar.innerHTML = 'Parar';
+    }
+
+    console.log(estadosDoGravador.estaGravando);
+};
