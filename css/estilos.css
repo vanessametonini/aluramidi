@@ -104,7 +104,7 @@ h1 {
   gap: 10px 10px;
   grid-template-areas:
     "tela tela tela"
-    "apagar gravar tocar";
+    "gravar tocar novo";
 
   margin-bottom: 20px;
 }
@@ -156,8 +156,8 @@ h1 {
   color: #666666;
 }
 
-.apagar {
-  grid-area: apagar;
+.novo {
+  grid-area: novo;
 }
 
 .gravar {

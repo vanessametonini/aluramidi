@@ -1,7 +1,4 @@
-const estadosDoGravador = {
-    estaGravando: false
-};
-
+  
 function tocaSom (seletorAudio) {
     const elemento = document.querySelector(seletorAudio);
 
@@ -14,48 +11,55 @@ function tocaSom (seletorAudio) {
     }
 }
 
+//criando um elemento dinamicamente
 function gravaSom(nomeDoSom) {
-    const templateDoSom  = `<span class="som">${nomeDoSom}</span>`;
-    if (estadosDoGravador.estaGravando) {
+    const templateDoSom = document.createElement('span');
+    templateDoSom.classList.add('som');
+    templateDoSom.textContent = nomeDoSom;
+    if (gravadorAtivo) {
         const tela = document.querySelector('.tela .rolagem');
-        tela.insertAdjacentHTML('beforeend', templateDoSom);
+        tela.insertAdjacentElement('beforeend', templateDoSom);
     }
-}
-const listaDeTeclas = document.querySelectorAll('.tecla');
-
-//para
-for (let contador = 0; contador < listaDeTeclas.length; contador++) {
-    const tecla = listaDeTeclas[contador];
-    const instrumento = tecla.classList[1];
-    const idAudio = `#som_${instrumento}`; //template string
-    tecla.addEventListener('click', () => {
-        tocaSom(idAudio);
-    });
-
-    tecla.addEventListener('click', () => {
-        gravaSom(tecla.textContent);
-    });
-    tecla.onkeydown = function (evento) {
-
-        if (evento.code === 'Space' || evento.code === 'Enter') {
-            tecla.classList.add('ativa');
+    templateDoSom.addEventListener('click', function () {
+        if(confirm('Tem certeza que deseja remover?')) {
+            this.remove();
         }
-
-    }
-    tecla.onkeyup = function () {
-        tecla.classList.remove('ativa');
-    }
+    });
 }
 
-const botaoGravar = document.querySelector('.gravar');
+const teclado = document.querySelector('.teclado');
+teclado.addEventListener('click', function ( evento ) {
+    const tecla = evento.target;
+    if (tecla.localName === 'button') {
+        const instrumento = tecla.classList[1];
+        const idAudio = `#som_${instrumento}`;
+        tocaSom(idAudio);
+    }
+});
 
+teclado.addEventListener('onkeydown', function (evento) {
+    const tecla = evento.target;
+    if (evento.code === 'Space' || evento.code === 'Enter') {
+        tecla.classList.add('ativa');
+    }
+});
+
+teclado.addEventListener('onkeyup', function (evento) {
+    const tecla = evento.target;
+    tecla.classList.remove('ativa');
+});
+
+
+//estado do botão gravar
+let gravadorAtivo = false;
+const botaoGravar = document.querySelector('.gravar');
 botaoGravar.addEventListener('click', () => {
-    if (estadosDoGravador.estaGravando == true) {
-        estadosDoGravador.estaGravando = false;
+    if (gravadorAtivo == true) {
+        gravadorAtivo = false;
         botaoGravar.textContent = 'Gravar';
     } else {
-        estadosDoGravador.estaGravando = true;
+        gravadorAtivo = true;
         botaoGravar.textContent = 'Parar';
     }
-    console.log(estadosDoGravador.estaGravando);
+    console.log(gravadorAtivo);
 });
