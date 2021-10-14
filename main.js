@@ -1,4 +1,5 @@
-  
+let gravadorAtivo = false; 
+
 function tocaSom (seletorAudio) {
     const elemento = document.querySelector(seletorAudio);
 
@@ -29,11 +30,13 @@ function gravaSom(nomeDoSom) {
 
 const teclado = document.querySelector('.teclado');
 teclado.addEventListener('click', function ( evento ) {
+    console.log(evento.target);
     const tecla = evento.target;
     if (tecla.localName === 'button') {
         const instrumento = tecla.classList[1];
         const idAudio = `#som_${instrumento}`;
         tocaSom(idAudio);
+        gravaSom(tecla.textContent);
     }
 });
 
@@ -43,7 +46,6 @@ teclado.addEventListener('onkeydown', function (evento) {
         tecla.classList.add('ativa');
     }
 });
-
 teclado.addEventListener('onkeyup', function (evento) {
     const tecla = evento.target;
     tecla.classList.remove('ativa');
@@ -51,7 +53,6 @@ teclado.addEventListener('onkeyup', function (evento) {
 
 
 //estado do botão gravar
-let gravadorAtivo = false;
 const botaoGravar = document.querySelector('.gravar');
 botaoGravar.addEventListener('click', () => {
     if (gravadorAtivo == true) {
