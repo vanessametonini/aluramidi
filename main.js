@@ -13,10 +13,11 @@ function tocaSom (seletorAudio) {
 }
 
 //criando um elemento dinamicamente
-function gravaSom(nomeDoSom) {
+function gravaSom(objetoDoSom) {
     const templateDoSom = document.createElement('span');
     templateDoSom.classList.add('som');
-    templateDoSom.textContent = nomeDoSom;
+    templateDoSom.textContent = objetoDoSom.nome;
+    templateDoSom.setAttribute('data-id', objetoDoSom.idElementoAudio);
     if (gravadorAtivo) {
         const tela = document.querySelector('.tela .rolagem');
         tela.insertAdjacentElement('beforeend', templateDoSom);
@@ -29,28 +30,35 @@ function gravaSom(nomeDoSom) {
 }
 
 const teclado = document.querySelector('.teclado');
+
 teclado.addEventListener('click', function ( evento ) {
-    console.log(evento.target);
     const tecla = evento.target;
     if (tecla.localName === 'button') {
         const instrumento = tecla.classList[1];
         const idAudio = `#som_${instrumento}`;
         tocaSom(idAudio);
-        gravaSom(tecla.textContent);
     }
 });
 
-teclado.addEventListener('onkeydown', function (evento) {
+teclado.addEventListener('keydown', function (evento) {
     const tecla = evento.target;
     if (evento.code === 'Space' || evento.code === 'Enter') {
         tecla.classList.add('ativa');
     }
 });
-teclado.addEventListener('onkeyup', function (evento) {
-    const tecla = evento.target;
-    tecla.classList.remove('ativa');
+
+teclado.addEventListener('keyup', function ( {target} ) {
+    target.classList.remove('ativa');
 });
 
+
+function gravacao (evento) {
+    const objeto = {
+        nome: evento.target.textContent,
+        idElementoAudio: `#som_${evento.target.classList[1]}`
+    };
+    gravaSom(objeto);
+}
 
 //estado do botão gravar
 const botaoGravar = document.querySelector('.gravar');
@@ -58,9 +66,38 @@ botaoGravar.addEventListener('click', () => {
     if (gravadorAtivo == true) {
         gravadorAtivo = false;
         botaoGravar.textContent = 'Gravar';
+        teclado.removeEventListener('click', gravacao);
     } else {
         gravadorAtivo = true;
+        teclado.addEventListener('click', gravacao);
         botaoGravar.textContent = 'Parar';
     }
-    console.log(gravadorAtivo);
 });
+
+const botaoTocar = document.querySelector('.tocar');
+botaoTocar.addEventListener('click', () => {
+    const sequencia = document.querySelectorAll('.tela span.som');
+    if (sequencia.length != 0) {  
+      tocarSequencia(sequencia);
+    } else {
+        alert('Grave uma sequência de som!');
+    }
+});
+
+
+function tocarSequencia(listaDeSons) {
+    let espera = 0;
+
+    const listaDeIds = [];
+    listaDeSons.forEach((som)=>{
+        listaDeIds.push(som.dataset.id); 
+    });
+
+    listaDeIds.forEach((id) => { 
+        setTimeout(() => {
+            tocaSom(id);
+        }, espera);  
+
+        espera += 250;
+    });
+}
