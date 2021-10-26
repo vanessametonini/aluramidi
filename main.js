@@ -61,6 +61,7 @@ teclado.addEventListener('click', function ( evento ) {
         }
     });
 
+    //desestruturação de objetos
     teclado.addEventListener('keyup', function ( {target} ) {
         target.classList.remove('ativa');
     });
